@@ -1,6 +1,7 @@
 export interface Patient {
   id: string;
   name: string;
+  details?: PatientDetails;
 }
 
 export interface PatientDetails {

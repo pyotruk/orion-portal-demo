@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Outlet} from "react-router-dom";
-import {useAuth} from "../components/LoginPage/AuthProvider";
+import {useAuth} from "../auth/AuthProvider";
 
 export default function BaseLayout() {
   let auth = useAuth();

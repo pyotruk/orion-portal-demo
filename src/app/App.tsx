@@ -1,22 +1,23 @@
 import * as React from "react";
 import {Routes, Route} from "react-router-dom";
-import AuthProvider from "./components/LoginPage/AuthProvider";
-import LoginPage from "./components/LoginPage/LoginPage";
-import Portal from "./components/Portal/Portal";
-import BaseLayout from "./layouts/BaseLayout";
-import RequireAuth from "./components/LoginPage/RequireAuth";
+import "./App.scss";
+import AuthProvider from "../auth/AuthProvider";
+import LoginView from "../views/LoginView/LoginView";
+import BaseLayout from "../layouts/BaseLayout";
+import RequireAuth from "../auth/RequireAuth";
+import PortalView from "../views/PortalView/PortalView";
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route element={<BaseLayout />}>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginView />} />
           <Route
             path="/"
             element={
               <RequireAuth>
-                <Portal />
+                <PortalView />
               </RequireAuth>
             }
           />

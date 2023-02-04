@@ -1,10 +1,10 @@
 import * as React from "react";
-import ClinicianDetailsComponent from "../ClinicianDetailsComponent/ClinicianDetails";
+import ClinicianDetailsComponent from "../../components/ClinicianDetailsComponent/ClinicianDetails";
 import {useAppDispatch} from "../../redux/hooks";
 import {fetchClinicianDetails} from "../../redux/clinicianSlice";
 import {useEffect} from "react";
 
-export default function Portal() {
+export default function PortalView() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

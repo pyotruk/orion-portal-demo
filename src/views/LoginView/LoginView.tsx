@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useAuth} from "./AuthProvider";
+import {useAuth} from "../../auth/AuthProvider";
 
-export default function LoginPage() {
+export default function LoginView() {
   let auth = useAuth();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
