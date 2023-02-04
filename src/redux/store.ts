@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authSlice from "./authSlice";
+import clinicianSlice from "./clinicianSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
+    clinician: clinicianSlice,
   },
 });
 

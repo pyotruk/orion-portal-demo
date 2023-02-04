@@ -1,4 +1,4 @@
-export interface Clinician {
+export interface ClinicianDetails {
   username: string;
   role: string;
   title?: string;

@@ -1,7 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RootState} from './store';
+import {RootState, store} from './store';
 import Api from './api';
 import {SessionToken} from "../structures/SessionToken";
+
+const LOCAL_STORAGE_SESSION_TOKEN_KEY = "orion-portal-api-token";
 
 export interface AuthState {
   token: SessionToken;
@@ -9,7 +11,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: "",
+  token: window.localStorage.getItem(LOCAL_STORAGE_SESSION_TOKEN_KEY) || "",
   isPending: false,
 };
 
@@ -26,7 +28,7 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = "";
-      // TODO sessionStorage
+      localStorage.removeItem(LOCAL_STORAGE_SESSION_TOKEN_KEY);
     },
   },
   extraReducers: (builder) => {
@@ -35,6 +37,7 @@ export const authSlice = createSlice({
         state.isPending = true;
       })
       .addCase(login.fulfilled, (state, action) => {
+        localStorage.setItem(LOCAL_STORAGE_SESSION_TOKEN_KEY, action.payload.sessionToken);
         state.token = action.payload.sessionToken;
         state.isPending = false;
       });
@@ -42,7 +45,7 @@ export const authSlice = createSlice({
 });
 
 export const {logout} = authSlice.actions;
-export const selectSessionToken = (state: RootState): SessionToken => state.auth.token;
+export const selectSessionToken = (state = store.getState()): SessionToken => state.auth.token;
 export const selectIsAuthenticated = (state: RootState): boolean => !!state.auth.token;
 
 export default authSlice.reducer;

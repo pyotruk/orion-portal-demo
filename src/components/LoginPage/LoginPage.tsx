@@ -21,10 +21,10 @@ export default function LoginPage() {
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username: <input name="username" type="text" /></label>
+          <label>Username: <input name="username" type="text" autoComplete="username" /></label>
         </div>
         <div>
-          <label>Password: <input name="password" type="password" /></label>
+          <label>Password: <input name="password" type="password" autoComplete="current-password" /></label>
         </div>
         <div>
           <button type="submit">Login</button>
