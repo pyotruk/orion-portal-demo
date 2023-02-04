@@ -4,7 +4,7 @@ import {selectClinicianDetails} from "../../redux/clinicianSlice";
 import {useAppSelector} from "../../redux/hooks";
 
 export default function ClinicianDetailsComponent() {
-  const clinician = useAppSelector(selectClinicianDetails);
+  const clinician: undefined | ClinicianDetails = useAppSelector(selectClinicianDetails);
 
   return (
     <div>

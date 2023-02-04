@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PatientDetails} from "../../structures/Patient";
+import {PatientDetails} from "../../structures/Patients";
 
 export default function PatientDetailsComponent(patient: PatientDetails) {
   return (

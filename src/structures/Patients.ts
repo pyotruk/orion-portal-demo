@@ -1,4 +1,8 @@
-export interface Patient {
+export interface PatientsDto {
+  patients: Patients[];
+}
+
+export interface Patients {
   id: string;
   name: string;
   details?: PatientDetails;
