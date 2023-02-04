@@ -1,10 +1,12 @@
 import * as React from "react";
-import AuthApi from "../../redux/api";
+import {login, logout, selectIsAuthenticated} from "../../redux/authSlice";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {useLocation, useNavigate} from "react-router-dom";
 
 interface AuthContextType {
-  user: any;
-  signin: (user: string, password: string, callback: VoidFunction) => void;
-  signout: (callback: VoidFunction) => void;
+  isAuthenticated: boolean,
+  login: (user: string, password: string) => void;
+  logout: () => void;
 }
 
 let AuthContext = React.createContext<AuthContextType>(null!);
@@ -14,22 +16,26 @@ export function useAuth() {
 }
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  let [user, setUser] = React.useState<any>(null);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const dispatch = useAppDispatch();
+  let navigate = useNavigate();
+  let location = useLocation();
 
-  let signin = (newUser: string, password: string, callback: VoidFunction) => {
-    AuthApi.login(newUser, password).then(() => {
-      setUser(newUser);
-      callback();
-    });
+  let from = location.state?.from?.pathname || "/";
+
+  let value = {
+    isAuthenticated,
+
+    login: (user: string, password: string) => {
+      dispatch(login({user, password})).then(() => {
+        navigate(from, { replace: true });
+      });
+    },
+    logout: () => {
+      dispatch(logout());
+      navigate("/", { replace: true });
+    }
   };
-
-  let signout = (callback: VoidFunction) => {
-    window.sessionStorage.clear();
-    setUser(null);
-    callback();
-  };
-
-  let value = { user, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
