@@ -7,7 +7,7 @@ export default function PatientDetailsComponent(props: {
   return (
     <div>
       {Object.keys(props.patient).map((key: string) => {
-        return <div>{key}: {props.patient[key as keyof PatientDetails]}</div>;
+        return <div key={key}>{key}: {props.patient[key as keyof PatientDetails]}</div>;
       })}
     </div>
   );

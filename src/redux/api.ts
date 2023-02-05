@@ -1,7 +1,7 @@
 import {SessionTokenDto} from "../structures/SessionToken";
 import {selectSessionToken} from "./authSlice";
 import {ClinicianDetails} from "../structures/ClinicianDetails";
-import {PatientsDto} from "../structures/Patient";
+import {PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
 
 const API_URL = "";
 const DEFAULT_HTTP_HEADERS = {
@@ -31,6 +31,16 @@ const Api = {
   },
   getPatients: async (): Promise<PatientsDto> => {
     const response: Response = await fetch(`${API_URL}/patients`, {
+      method: "GET",
+      headers: {
+        ...DEFAULT_HTTP_HEADERS,
+        "Authorization": selectSessionToken(),
+      },
+    });
+    return await response.json();
+  },
+  getPatientDetails: async (patientId: PatientId): Promise<PatientDetails> => {
+    const response: Response = await fetch(`${API_URL}/patient-details/${patientId}`, {
       method: "GET",
       headers: {
         ...DEFAULT_HTTP_HEADERS,

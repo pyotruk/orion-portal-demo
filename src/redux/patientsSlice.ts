@@ -1,8 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from './store';
 import Api from './api';
-import {Patient, PatientId} from "../structures/Patient";
-import {authSlice} from "./authSlice";
+import {Patient, PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
 
 export interface PatientsState {
   patients: Patient[];
@@ -18,19 +17,24 @@ const initialState: PatientsState = {
 
 export const fetchPatients = createAsyncThunk(
   'patients/list',
-  async () => {
-    return await Api.getPatients();
+  async (_, thunk) => {
+    const patients: PatientsDto = await Api.getPatients();
+    thunk.dispatch(selectPatientAndFetchDetails(patients.patients[0].id));
+    return patients;
+  }
+);
+
+export const selectPatientAndFetchDetails = createAsyncThunk(
+  'patients/details',
+  async (patientId: PatientId, thunk) => {
+    return await Api.getPatientDetails(patientId);
   }
 );
 
 export const patientsSlice = createSlice({
   name: 'patients',
   initialState,
-  reducers: {
-    selectPatient: (state, action: PayloadAction<PatientId>) => {
-      state.selectedPatientId = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPatients.pending, (state, action) => {
@@ -38,13 +42,15 @@ export const patientsSlice = createSlice({
       })
       .addCase(fetchPatients.fulfilled, (state, action) => {
         state.patients = action.payload.patients;
-        state.selectedPatientId = action.payload.patients[0].id;
         state.isPending = false;
+      })
+      .addCase(selectPatientAndFetchDetails.fulfilled, (state, action) => {
+        state.selectedPatientId = action.meta.arg;
+        const idx = state.patients.findIndex(patient => patient.id === state.selectedPatientId);
+        state.patients[idx].details = action.payload;
       });
   },
 });
-
-export const {selectPatient} = patientsSlice.actions;
 
 export const getPatients = (state: RootState): Patient[] => state.patients.patients;
 export const getSelectedPatientId = (state: RootState): undefined | PatientId => state.patients.selectedPatientId;

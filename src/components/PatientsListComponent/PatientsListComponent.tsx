@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Patient, PatientId} from "../../structures/Patient";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {getPatients, getSelectedPatientId, selectPatient} from "../../redux/patientsSlice";
+import {getPatients, getSelectedPatientId, selectPatientAndFetchDetails} from "../../redux/patientsSlice";
 import {Box, Tab} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
 import PatientDetailsComponent from "../PatientDetailsComponent/PatientDetailsComponent";
@@ -13,7 +13,7 @@ export default function PatientsListComponent() {
   const selectedPatientId: undefined | PatientId = useAppSelector(getSelectedPatientId);
 
   const handleChange = (event: React.SyntheticEvent, selectedPatientId: string) => {
-    dispatch(selectPatient(selectedPatientId));
+    dispatch(selectPatientAndFetchDetails(selectedPatientId));
   };
 
   return (
