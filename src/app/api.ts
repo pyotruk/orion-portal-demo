@@ -6,7 +6,7 @@ import {ErrorResponse} from "../structures/ErrorResponse";
 
 const API_URL = "";
 const DEFAULT_HTTP_HEADERS = {
-  "Content-Type": "application/json"
+  "Content-Type": "application/json",
 };
 
 const Api = {
@@ -55,6 +55,6 @@ const Api = {
     });
     return await response.json();
   },
-}
+};
 
 export default Api;

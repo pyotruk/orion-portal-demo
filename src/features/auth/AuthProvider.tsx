@@ -9,33 +9,31 @@ interface AuthContextType {
   logout: () => void;
 }
 
-let AuthContext = React.createContext<AuthContextType>(null!);
+const AuthContext = React.createContext<AuthContextType>(null!);
 
 export function useAuth() {
   return React.useContext(AuthContext);
 }
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({children}: { children: React.ReactNode }) {
   const isAuthenticated = useAppSelector(getIsAuthenticated);
   const dispatch = useAppDispatch();
-  let navigate = useNavigate();
-  let location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  let from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
-  let value = {
+  return <AuthContext.Provider value={{
     isAuthenticated,
 
     login: (user: string, password: string) => {
       dispatch(login({user, password})).then(() => {
-        navigate(from, { replace: true });
+        navigate(from, {replace: true});
       });
     },
     logout: () => {
       dispatch(logout());
-      navigate("/", { replace: true });
-    }
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+      navigate("/", {replace: true});
+    },
+  }}>{children}</AuthContext.Provider>;
 }

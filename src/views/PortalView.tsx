@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {
   fetchClinicianDetails,
   getClinicianDetails,
-  getIsPending as getIsClinicianPending
+  getIsPending as getIsClinicianPending,
 } from "../features/clinician/clinicianSlice";
 import {useEffect} from "react";
 import PatientsListComponent from "../features/patients/PatientsListComponent";

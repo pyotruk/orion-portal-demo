@@ -1,6 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RootState, store} from '../../app/store';
-import Api from '../../app/api';
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {RootState, store} from "../../app/store";
+import Api from "../../app/api";
 import {SessionToken} from "../../structures/SessionToken";
 
 const LOCAL_STORAGE_SESSION_TOKEN_KEY = "orion-portal-api-token";
@@ -18,7 +18,7 @@ const initialState: AuthState = {
 };
 
 export const login = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (args: { user: string, password: string }, {rejectWithValue}) => {
     try {
       return await Api.login(args.user, args.password);
@@ -29,7 +29,7 @@ export const login = createAsyncThunk(
 );
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
@@ -39,7 +39,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state, action) => {
+      .addCase(login.pending, (state) => {
         state.error = "";
         state.isPending = true;
       })

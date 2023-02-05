@@ -18,5 +18,5 @@ export interface PatientDetails {
   familyName: string;
   suffix?: string;
   age: number;
-  sex: 'Male' | 'Female' | 'Unknown' | 'Indeterminate';
+  sex: "Male" | "Female" | "Unknown" | "Indeterminate";
 }

@@ -1,9 +1,7 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {AppDispatch, RootState} from '../../app/store';
-import Api from '../../app/api';
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {AppDispatch, RootState} from "../../app/store";
+import Api from "../../app/api";
 import {Patient, PatientDetails, PatientId, PatientsDto} from "../../structures/Patient";
-import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
-import {Dispatch} from "redux";
 
 export interface PatientsState {
   patients: Patient[];
@@ -24,7 +22,7 @@ export const fetchPatients = createAsyncThunk<
   void,
   {dispatch: AppDispatch}
 >(
-  'patients/list',
+  "patients/list",
   async (_, {dispatch}) => {
     const patients: PatientsDto = await Api.getPatients();
     dispatch(selectPatientAndFetchDetails(patients.patients[0].id));
@@ -37,7 +35,7 @@ export const selectPatientAndFetchDetails = createAsyncThunk<
   PatientId,
   {state: RootState}
 >(
-  'patients/details',
+  "patients/details",
   async (patientId: PatientId, {getState}): Promise<PatientDetails> => {
     const patients: Patient[] = getPatients(getState());
     const patientDetails: undefined | PatientDetails = patients.find(patient => patient.id === patientId)?.details;
@@ -49,12 +47,12 @@ export const selectPatientAndFetchDetails = createAsyncThunk<
 );
 
 export const patientsSlice = createSlice({
-  name: 'patients',
+  name: "patients",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPatients.pending, (state, action) => {
+      .addCase(fetchPatients.pending, (state) => {
         state.isPending = true;
       })
       .addCase(fetchPatients.fulfilled, (state, action) => {

@@ -6,16 +6,16 @@ import {getError, getIsPending} from "../features/auth/authSlice";
 import "./LoginView.scss";
 
 export default function LoginView() {
-  let auth = useAuth();
+  const auth = useAuth();
   const isPending: boolean = useAppSelector(getIsPending);
   const error: string = useAppSelector(getError);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
-    let password = formData.get("password") as string;
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
 
     auth.login(username, password);
   }

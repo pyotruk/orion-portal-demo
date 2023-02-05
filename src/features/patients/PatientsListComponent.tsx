@@ -5,7 +5,7 @@ import {
   getIsPatientDetailsPending,
   getPatients,
   getSelectedPatientId,
-  selectPatientAndFetchDetails
+  selectPatientAndFetchDetails,
 } from "./patientsSlice";
 import {Box, CircularProgress, Tab} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
@@ -23,9 +23,9 @@ export default function PatientsListComponent() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{width: "100%"}}>
       {selectedPatientId && <TabContext value={selectedPatientId}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{borderBottom: 1, borderColor: "divider"}}>
           <TabList onChange={handleChange}>
             {patients && patients.map(patient => {
               return <Tab
@@ -42,7 +42,7 @@ export default function PatientsListComponent() {
               <CircularProgress />}
             {isPatientDetailsPending !== patient.id && patient.details &&
               <PatientDetailsComponent patient={patient.details}/>}
-          </TabPanel>
+          </TabPanel>;
         })}
       </TabContext>}
     </Box>

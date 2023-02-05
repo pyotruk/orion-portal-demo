@@ -1,6 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RootState} from '../../app/store';
-import Api from '../../app/api';
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {RootState} from "../../app/store";
+import Api from "../../app/api";
 import {ClinicianDetails} from "../../structures/ClinicianDetails";
 
 export interface ClinicianState {
@@ -14,19 +14,19 @@ const initialState: ClinicianState = {
 };
 
 export const fetchClinicianDetails = createAsyncThunk(
-  'clinician/details',
+  "clinician/details",
   async () => {
     return await Api.getClinician();
   }
 );
 
 export const clinicianSlice = createSlice({
-  name: 'clinician',
+  name: "clinician",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchClinicianDetails.pending, (state, action) => {
+      .addCase(fetchClinicianDetails.pending, (state) => {
         state.isPending = true;
       })
       .addCase(fetchClinicianDetails.fulfilled, (state, action) => {
