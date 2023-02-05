@@ -2,6 +2,7 @@ import {SessionTokenDto} from "../structures/SessionToken";
 import {getSessionToken} from "../features/auth/authSlice";
 import {ClinicianDetails} from "../structures/ClinicianDetails";
 import {PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
+import {ErrorResponse} from "../structures/ErrorResponse";
 
 const API_URL = "";
 const DEFAULT_HTTP_HEADERS = {
@@ -17,7 +18,12 @@ const Api = {
         "Authorization": "Basic " + window.btoa(`${user}:${password}`),
       },
     });
-    return await response.json();
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error((data as ErrorResponse).errorMessage);
+    } else {
+      return data;
+    }
   },
   getClinician: async (): Promise<ClinicianDetails> => {
     const response: Response = await fetch(`${API_URL}/clinician-details`, {

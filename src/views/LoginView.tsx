@@ -2,12 +2,13 @@ import * as React from "react";
 import {useAuth} from "../features/auth/AuthProvider";
 import {Box, Button, CircularProgress, Container, TextField} from "@mui/material";
 import {useAppSelector} from "../app/hooks";
-import {getIsPending} from "../features/auth/authSlice";
+import {getError, getIsPending} from "../features/auth/authSlice";
 import "./LoginView.scss";
 
 export default function LoginView() {
   let auth = useAuth();
   const isPending: boolean = useAppSelector(getIsPending);
+  const error: string = useAppSelector(getError);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,11 +31,25 @@ export default function LoginView() {
       <Box>
         <form onSubmit={handleSubmit}>
           <div>
-            <TextField name="username" required label="Username" variant="outlined"/>
+            <TextField
+              name="username"
+              required
+              label="Username"
+              variant="outlined"
+              autoComplete="username"
+            />
           </div>
           <div>
-            <TextField name="password" type="password" required label="Password" variant="outlined"/>
+            <TextField
+              name="password"
+              type="password"
+              required
+              label="Password"
+              variant="outlined"
+              autoComplete="current-password"
+            />
           </div>
+          {error && <div className="error">{error}</div>}
           <div>
             <Button variant="contained" type="submit" disabled={isPending}>
               {!isPending && <span>Login</span>}
