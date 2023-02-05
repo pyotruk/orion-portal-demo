@@ -1,4 +1,4 @@
 ## How to run
 
-1. run `docker-compose up`
-1. navigate to http://localhost:8080
+1. run `npm i && npm start`
+1. navigate to http://localhost:3000
