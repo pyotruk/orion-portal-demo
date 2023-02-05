@@ -1,6 +1,5 @@
 import * as React from "react";
 import {Routes, Route} from "react-router-dom";
-import "./App.scss";
 import AuthProvider from "../auth/AuthProvider";
 import LoginView from "../views/LoginView/LoginView";
 import BaseLayout from "../layouts/BaseLayout";

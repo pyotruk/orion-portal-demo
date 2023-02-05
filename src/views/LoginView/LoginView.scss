@@ -1,0 +1,16 @@
+.LoginView {
+  text-align: center;
+
+  form {
+    > div {
+      margin: 2em 0;
+      text-align: center;
+    }
+    .MuiFormControl-root {
+      width: 100%;
+    }
+    button {
+      min-width: 140px;
+    }
+  }
+}

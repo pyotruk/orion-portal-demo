@@ -1,14 +1,15 @@
 import * as React from "react";
 import {PatientDetails} from "../../structures/Patient";
+import PersonName from "../PersonName";
 
 export default function PatientDetailsComponent(props: {
   patient: PatientDetails,
 }) {
   return (
     <div>
-      {Object.keys(props.patient).map((key: string) => {
-        return <div key={key}>{key}: {props.patient[key as keyof PatientDetails]}</div>;
-      })}
+      <p><PersonName person={props.patient}/></p>
+      <p><b>Age:</b> {props.patient.age}</p>
+      <p><b>Sex:</b> {props.patient.sex}</p>
     </div>
   );
 }
