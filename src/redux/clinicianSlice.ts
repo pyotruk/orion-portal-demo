@@ -36,6 +36,7 @@ export const clinicianSlice = createSlice({
   },
 });
 
-export const selectClinicianDetails = (state: RootState): undefined | ClinicianDetails => state.clinician.details;
+export const getClinicianDetails = (state: RootState): undefined | ClinicianDetails => state.clinician.details;
+export const getIsPending = (state: RootState): boolean => state.clinician.isPending;
 
 export default clinicianSlice.reducer;

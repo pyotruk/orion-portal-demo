@@ -1,5 +1,5 @@
 import {SessionTokenDto} from "../structures/SessionToken";
-import {selectSessionToken} from "./authSlice";
+import {getSessionToken} from "./authSlice";
 import {ClinicianDetails} from "../structures/ClinicianDetails";
 import {PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
 
@@ -24,7 +24,7 @@ const Api = {
       method: "GET",
       headers: {
         ...DEFAULT_HTTP_HEADERS,
-        "Authorization": selectSessionToken(),
+        "Authorization": getSessionToken(),
       },
     });
     return await response.json();
@@ -34,7 +34,7 @@ const Api = {
       method: "GET",
       headers: {
         ...DEFAULT_HTTP_HEADERS,
-        "Authorization": selectSessionToken(),
+        "Authorization": getSessionToken(),
       },
     });
     return await response.json();
@@ -44,7 +44,7 @@ const Api = {
       method: "GET",
       headers: {
         ...DEFAULT_HTTP_HEADERS,
-        "Authorization": selectSessionToken(),
+        "Authorization": getSessionToken(),
       },
     });
     return await response.json();

@@ -1,8 +1,12 @@
 import * as React from "react";
 import {useAuth} from "../../auth/AuthProvider";
+import {CircularProgress} from "@mui/material";
+import {useAppSelector} from "../../redux/hooks";
+import {getIsPending} from "../../redux/authSlice";
 
 export default function LoginView() {
   let auth = useAuth();
+  const isPending: boolean = useAppSelector(getIsPending);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,7 +31,10 @@ export default function LoginView() {
           <label>Password: <input name="password" type="password" autoComplete="current-password" /></label>
         </div>
         <div>
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isPending}>
+            {!isPending && <span>Login</span>}
+            {isPending && <CircularProgress />}
+          </button>
         </div>
       </form>
     </div>

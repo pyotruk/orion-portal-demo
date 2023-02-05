@@ -1,8 +1,13 @@
 import * as React from "react";
 import {Patient, PatientId} from "../../structures/Patient";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {getPatients, getSelectedPatientId, selectPatientAndFetchDetails} from "../../redux/patientsSlice";
-import {Box, Tab} from "@mui/material";
+import {
+  getIsPatientDetailsPending,
+  getPatients,
+  getSelectedPatientId,
+  selectPatientAndFetchDetails
+} from "../../redux/patientsSlice";
+import {Box, CircularProgress, Tab} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
 import PatientDetailsComponent from "../PatientDetailsComponent/PatientDetailsComponent";
 
@@ -11,6 +16,7 @@ export default function PatientsListComponent() {
 
   const patients: Patient[] = useAppSelector(getPatients);
   const selectedPatientId: undefined | PatientId = useAppSelector(getSelectedPatientId);
+  const isPatientDetailsPending: undefined | PatientId = useAppSelector(getIsPatientDetailsPending);
 
   const handleChange = (event: React.SyntheticEvent, selectedPatientId: string) => {
     dispatch(selectPatientAndFetchDetails(selectedPatientId));
@@ -32,7 +38,10 @@ export default function PatientsListComponent() {
         </Box>
         {patients && patients.map(patient => {
           return <TabPanel value={patient.id} key={patient.id}>
-            {patient.details && <PatientDetailsComponent patient={patient.details}/>}
+            {isPatientDetailsPending === patient.id &&
+              <CircularProgress />}
+            {isPatientDetailsPending !== patient.id && patient.details &&
+              <PatientDetailsComponent patient={patient.details}/>}
           </TabPanel>
         })}
       </TabContext>}

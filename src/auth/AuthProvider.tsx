@@ -1,5 +1,5 @@
 import * as React from "react";
-import {login, logout, selectIsAuthenticated} from "../redux/authSlice";
+import {login, logout, getIsAuthenticated} from "../redux/authSlice";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {useLocation, useNavigate} from "react-router-dom";
 
@@ -16,7 +16,7 @@ export function useAuth() {
 }
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
   let location = useLocation();

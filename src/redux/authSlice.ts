@@ -45,7 +45,8 @@ export const authSlice = createSlice({
 });
 
 export const {logout} = authSlice.actions;
-export const selectSessionToken = (state = store.getState()): SessionToken => state.auth.token;
-export const selectIsAuthenticated = (state: RootState): boolean => !!state.auth.token;
+export const getSessionToken = (state = store.getState()): SessionToken => state.auth.token;
+export const getIsAuthenticated = (state: RootState): boolean => !!state.auth.token;
+export const getIsPending = (state: RootState): boolean => state.auth.isPending;
 
 export default authSlice.reducer;
