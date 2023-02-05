@@ -1,9 +1,11 @@
 export interface PatientsDto {
-  patients: Patients[];
+  patients: Patient[];
 }
 
-export interface Patients {
-  id: string;
+export type PatientId = string;
+
+export interface Patient {
+  id: PatientId;
   name: string;
   details?: PatientDetails;
 }

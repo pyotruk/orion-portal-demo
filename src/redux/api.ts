@@ -1,7 +1,7 @@
 import {SessionTokenDto} from "../structures/SessionToken";
 import {selectSessionToken} from "./authSlice";
 import {ClinicianDetails} from "../structures/ClinicianDetails";
-import {PatientsDto} from "../structures/Patients";
+import {PatientsDto} from "../structures/Patient";
 
 const API_URL = "";
 const DEFAULT_HTTP_HEADERS = {

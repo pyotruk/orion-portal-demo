@@ -1,19 +1,41 @@
 import * as React from "react";
-import {Patients} from "../../structures/Patients";
-import {useAppSelector} from "../../redux/hooks";
-import {selectPatients} from "../../redux/patientsSlice";
+import {Patient, PatientId} from "../../structures/Patient";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {getPatients, getSelectedPatientId, selectPatient} from "../../redux/patientsSlice";
+import {Box, Tab} from "@mui/material";
+import {TabContext, TabList, TabPanel} from "@mui/lab";
+import PatientDetailsComponent from "../PatientDetailsComponent/PatientDetailsComponent";
 
 export default function PatientsListComponent() {
-  const patients: Patients[] = useAppSelector(selectPatients);
+  const dispatch = useAppDispatch();
+
+  const patients: Patient[] = useAppSelector(getPatients);
+  const selectedPatientId: undefined | PatientId = useAppSelector(getSelectedPatientId);
+
+  const handleChange = (event: React.SyntheticEvent, selectedPatientId: string) => {
+    dispatch(selectPatient(selectedPatientId));
+  };
 
   return (
-    <ul>
-      {patients && patients.map((patient: Patients) => {
-        return <li key={patient.id}>
-          <b>#{patient.id}</b>&nbsp;
-          <span>{patient.name}</span>
-        </li>;
-      })}
-    </ul>
+    <Box sx={{ width: '100%', typography: 'body1' }}>
+      {selectedPatientId && <TabContext value={selectedPatientId}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange}>
+            {patients && patients.map(patient => {
+              return <Tab
+                label={patient.name}
+                value={patient.id}
+                key={patient.id}
+              />;
+            })}
+          </TabList>
+        </Box>
+        {patients && patients.map(patient => {
+          return <TabPanel value={patient.id} key={patient.id}>
+            {patient.details && <PatientDetailsComponent patient={patient.details}/>}
+          </TabPanel>
+        })}
+      </TabContext>}
+    </Box>
   );
 }
