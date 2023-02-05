@@ -3,7 +3,7 @@ import {RootState, store} from "../../app/store";
 import Api from "../../app/api";
 import {SessionToken} from "../../structures/SessionToken";
 
-const LOCAL_STORAGE_SESSION_TOKEN_KEY = "orion-portal-api-token";
+export const LOCAL_STORAGE_SESSION_TOKEN_KEY = "orion-portal-api-token";
 
 export interface AuthState {
   token: SessionToken;
