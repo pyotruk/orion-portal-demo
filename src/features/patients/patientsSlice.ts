@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {AppDispatch, RootState} from './store';
-import Api from './api';
-import {Patient, PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
+import {AppDispatch, RootState} from '../../app/store';
+import Api from '../../app/api';
+import {Patient, PatientDetails, PatientId, PatientsDto} from "../../structures/Patient";
 import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
 import {Dispatch} from "redux";
 

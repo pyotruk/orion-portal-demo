@@ -1,7 +1,7 @@
 import * as React from "react";
-import {login, logout, getIsAuthenticated} from "../redux/authSlice";
-import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {login, logout, getIsAuthenticated} from "./authSlice";
 import {useLocation, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
 
 interface AuthContextType {
   isAuthenticated: boolean,

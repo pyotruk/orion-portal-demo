@@ -1,6 +1,6 @@
 import * as React from "react";
 import {PatientDetails} from "../../structures/Patient";
-import PersonName from "../PersonName";
+import PersonName from "../../shared/PersonName";
 
 export default function PatientDetailsComponent(props: {
   patient: PatientDetails,

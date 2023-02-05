@@ -1,5 +1,5 @@
 import {SessionTokenDto} from "../structures/SessionToken";
-import {getSessionToken} from "./authSlice";
+import {getSessionToken} from "../features/auth/authSlice";
 import {ClinicianDetails} from "../structures/ClinicianDetails";
 import {PatientDetails, PatientId, PatientsDto} from "../structures/Patient";
 

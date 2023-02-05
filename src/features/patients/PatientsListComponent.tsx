@@ -1,15 +1,15 @@
 import * as React from "react";
 import {Patient, PatientId} from "../../structures/Patient";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {
   getIsPatientDetailsPending,
   getPatients,
   getSelectedPatientId,
   selectPatientAndFetchDetails
-} from "../../redux/patientsSlice";
+} from "./patientsSlice";
 import {Box, CircularProgress, Tab} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
-import PatientDetailsComponent from "../PatientDetailsComponent/PatientDetailsComponent";
+import PatientDetailsComponent from "./PatientDetailsComponent";
 
 export default function PatientsListComponent() {
   const dispatch = useAppDispatch();

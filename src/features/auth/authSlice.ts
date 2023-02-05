@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RootState, store} from './store';
-import Api from './api';
-import {SessionToken} from "../structures/SessionToken";
+import {RootState, store} from '../../app/store';
+import Api from '../../app/api';
+import {SessionToken} from "../../structures/SessionToken";
 
 const LOCAL_STORAGE_SESSION_TOKEN_KEY = "orion-portal-api-token";
 

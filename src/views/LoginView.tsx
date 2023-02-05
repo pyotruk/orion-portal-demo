@@ -1,8 +1,8 @@
 import * as React from "react";
-import {useAuth} from "../../auth/AuthProvider";
+import {useAuth} from "../features/auth/AuthProvider";
 import {Box, Button, CircularProgress, Container, TextField} from "@mui/material";
-import {useAppSelector} from "../../redux/hooks";
-import {getIsPending} from "../../redux/authSlice";
+import {useAppSelector} from "../app/hooks";
+import {getIsPending} from "../features/auth/authSlice";
 import "./LoginView.scss";
 
 export default function LoginView() {

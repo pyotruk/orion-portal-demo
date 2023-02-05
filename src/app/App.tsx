@@ -1,10 +1,10 @@
 import * as React from "react";
 import {Routes, Route} from "react-router-dom";
-import AuthProvider from "../auth/AuthProvider";
-import LoginView from "../views/LoginView/LoginView";
+import AuthProvider from "../features/auth/AuthProvider";
+import LoginView from "../views/LoginView";
 import BaseLayout from "../layouts/BaseLayout";
-import RequireAuth from "../auth/RequireAuth";
-import PortalView from "../views/PortalView/PortalView";
+import RequireAuth from "../features/auth/RequireAuth";
+import PortalView from "../views/PortalView";
 
 export default function App() {
   return (

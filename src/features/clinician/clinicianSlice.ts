@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RootState} from './store';
-import Api from './api';
-import {ClinicianDetails} from "../structures/ClinicianDetails";
+import {RootState} from '../../app/store';
+import Api from '../../app/api';
+import {ClinicianDetails} from "../../structures/ClinicianDetails";
 
 export interface ClinicianState {
   details: undefined | ClinicianDetails;

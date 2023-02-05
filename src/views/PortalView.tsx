@@ -1,17 +1,17 @@
 import * as React from "react";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {
   fetchClinicianDetails,
   getClinicianDetails,
   getIsPending as getIsClinicianPending
-} from "../../redux/clinicianSlice";
+} from "../features/clinician/clinicianSlice";
 import {useEffect} from "react";
-import PatientsListComponent from "../../components/PatientsListComponent/PatientsListComponent";
-import {fetchPatients, getIsPending as getIsPatientsPending} from "../../redux/patientsSlice";
+import PatientsListComponent from "../features/patients/PatientsListComponent";
+import {fetchPatients, getIsPending as getIsPatientsPending} from "../features/patients/patientsSlice";
 import {Box, Button, CircularProgress, Container, Grid} from "@mui/material";
-import {useAuth} from "../../auth/AuthProvider";
-import {ClinicianDetails} from "../../structures/ClinicianDetails";
-import PersonName from "../../components/PersonName";
+import {useAuth} from "../features/auth/AuthProvider";
+import {ClinicianDetails} from "../structures/ClinicianDetails";
+import PersonName from "../shared/PersonName";
 
 export default function PortalView() {
   const auth = useAuth();
